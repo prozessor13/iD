@@ -253,7 +253,8 @@ export function rendererBackground(context) {
       'mapillary-signs': 'Mapillary Signs',
       kartaview: 'KartaView Images',
       vegbilder: 'Norwegian Road Administration Images',
-      mapilio: 'Mapilio Images'
+      mapilio: 'Mapilio Images',
+      hudhudstreets: 'Hudhud Streets'
     };
 
     for (let layerID in photoOverlayLayers) {

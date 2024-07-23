@@ -62,69 +62,11 @@ export function uiCommit(context) {
 
     function initChangeset() {
 
-        // expire stored comment, hashtags, source after cutoff datetime - #3947 #4899
-        var commentDate = +prefs('commentDate') || 0;
-        var currDate = Date.now();
-        var cutoff = 2 * 86400 * 1000;   // 2 days
-        if (commentDate > currDate || currDate - commentDate > cutoff) {
-            prefs('comment', null);
-            prefs('hashtags', null);
-            prefs('source', null);
-        }
-
-        // load in explicitly-set values, if any
-        if (context.defaultChangesetComment()) {
-            prefs('comment', context.defaultChangesetComment());
-            prefs('commentDate', Date.now());
-        }
-        if (context.defaultChangesetSource()) {
-            prefs('source', context.defaultChangesetSource());
-            prefs('commentDate', Date.now());
-        }
-        if (context.defaultChangesetHashtags()) {
-            prefs('hashtags', context.defaultChangesetHashtags());
-            prefs('commentDate', Date.now());
-        }
-
-        var detected = utilDetect();
         var tags = {
-            comment: prefs('comment') || '',
+            comment: context.defaultChangesetComment() || '',
             created_by: context.cleanTagValue('iD ' + context.version),
-            host: context.cleanTagValue(detected.host),
             locale: context.cleanTagValue(localizer.localeCode())
         };
-
-        // call findHashtags initially - this will remove stored
-        // hashtags if any hashtags are found in the comment - #4304
-        findHashtags(tags, true);
-
-        var hashtags = prefs('hashtags');
-        if (hashtags) {
-            tags.hashtags = hashtags;
-        }
-
-        var source = prefs('source');
-        if (source) {
-            tags.source = source;
-        }
-        var photoOverlaysUsed = context.history().photoOverlaysUsed();
-        if (photoOverlaysUsed.length) {
-            var sources = (tags.source || '').split(';');
-
-            // include this tag for any photo layer
-            if (sources.indexOf('streetlevel imagery') === -1) {
-                sources.push('streetlevel imagery');
-            }
-
-            // add the photo overlays used during editing as sources
-            photoOverlaysUsed.forEach(function(photoOverlay) {
-                if (sources.indexOf(photoOverlay) === -1) {
-                    sources.push(photoOverlay);
-                }
-            });
-
-            tags.source = context.cleanTagValue(sources.join(';'));
-        }
 
         context.changeset = new osmChangeset({ tags: tags });
     }

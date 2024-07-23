@@ -592,3 +592,52 @@ label.streetside-hires {
     border-radius: 4px;
     cursor: pointer;
 }
+
+.layer-hudhudstreets {
+    pointer-events: none;
+}
+.layer-hudhudstreets .viewfield-group * {
+    fill: #21c6b6;
+    stroke: #ffffff;
+    stroke-opacity: .8;
+    fill-opacity: .8;
+}
+.layer-hudhudstreets .sequence {
+    stroke: #21c6b6;
+}
+.photo-controls-hudhudstreets {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+}
+.photo-controls-hudhudstreets button {
+    padding:0 6px;
+    pointer-events: initial;
+}
+
+label.hudhudstreets-hd {
+    float: left;
+    cursor: pointer;
+}
+.hudhudstreets-hd span {
+    margin-top: 2px;
+}
+.hudhudstreets-hd input[type="checkbox"] {
+    width: 12px;
+    height: 12px;
+    margin: 0 5px;
+}
+
+.slider-wrap {
+    display: inline-block;
+}
+
+.year-datalist {
+    display: flex;
+    justify-content: space-between;
+}
+
+.list-option-date-slider{
+    direction: rtl
+}

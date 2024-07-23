@@ -117,9 +117,10 @@ export default {
     const {key} = data;
     if ( !(key in _currScenes) ) {
       let newSceneOptions = {
-        showFullscreenCtrl: false,
+        showFullscreenCtrl: true,
+        showZoomCtrl: false,
         autoLoad: false,
-        compass: true,
+        compass: false,
         yaw: 0,
         type: 'equirectangular',
         preview: data.preview_path,

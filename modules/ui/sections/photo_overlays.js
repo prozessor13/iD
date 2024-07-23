@@ -96,7 +96,7 @@ export function uiSectionPhotoOverlays(context) {
                             if (!layerRendered(d)) {
                                 return t.append('street_side.minzoom_tooltip');
                             } else {
-                                return t.append(titleID);
+                                return titleID == "hudhudstreets.tooltip" ? 'Streetlevel photos from Hudhud' : t.append(titleID);
                             }
                         })
                         .placement('top')
@@ -113,7 +113,7 @@ export function uiSectionPhotoOverlays(context) {
             .html(function(d) {
                 var id = d.id;
                 if (id === 'mapillary-signs') id = 'photo_overlays.traffic_signs';
-                return t.html(id.replace(/-/g, '_') + '.title');
+                return id == "hudhudstreets" ? "Hudhud Streets" : t.html(id.replace(/-/g, '_') + '.title');
             });
 
         // Update

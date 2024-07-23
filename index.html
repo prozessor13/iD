@@ -33,7 +33,14 @@
       newScript.src = 'dist/iD.js';
 
       document.getElementsByTagName('head')[0].appendChild(newScript);
-
+      window.PUBLIC_OSM_URL = '';
+      window.PUBLIC_OSM_API = '';
+      window.PUBLIC_OSM_CLIENT_ID = '';
+      window.PUBLIC_OSM_CLIENT_SECRET = '';
+      window.HUDHUD_OSM_URL = '';
+      window.HUDHUD_OSM_CLIENT_ID = '';
+      window.HUDHUD_OSM_CLIENT_SECRET = '';
+      window.HUDHUD_STREETVIEW_API = '';
 
       function checkScript() {
         if (typeof iD === 'undefined' || !iD.utilDetect().support) {

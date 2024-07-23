@@ -11,37 +11,17 @@ const nsiCdnUrl = ENV__ID_NSI_CDN_URL
   || 'https://cdn.jsdelivr.net/npm/name-suggestion-index@{version}/';
 
 // api urls and settings
-const defaultOsmApiConnections = {
-  live: {
-    url: 'https://www.openstreetmap.org',
-    apiUrl: 'https://api.openstreetmap.org',
-    client_id: '0tmNTmd0Jo1dQp4AUmMBLtGiD9YpMuXzHefitcuVStc'
-  },
-  dev: {
-    url: 'https://api06.dev.openstreetmap.org',
-    client_id: 'Ee1wWJ6UlpERbF6BfTNOpwn0R8k_06mvMXdDUkeHMgw'
-  }
-};
-const osmApiConnections = [];
-if (ENV__ID_API_CONNECTION_URL !== null &&
-    ENV__ID_API_CONNECTION_CLIENT_ID !== null) {
-  // user specified API Oauth2 connection details
-  // see https://wiki.openstreetmap.org/wiki/OAuth#OAuth_2.0_2
-  osmApiConnections.push({
-    url: ENV__ID_API_CONNECTION_URL,
-    apiUrl: ENV__ID_API_CONNECTION_API_URL || ENV__ID_API_CONNECTION_URL,
-    client_id: ENV__ID_API_CONNECTION_CLIENT_ID
-  });
-} else if (ENV__ID_API_CONNECTION !== null &&
-  defaultOsmApiConnections[ENV__ID_API_CONNECTION] !== undefined) {
-  // if environment variable ID_API_CONNECTION is either "live" or "dev":
-  // only allow to connect to the respective OSM server
-    osmApiConnections.push(defaultOsmApiConnections[ENV__ID_API_CONNECTION]);
-} else {
-  // offer both "live" and "dev" servers by default
-  osmApiConnections.push(defaultOsmApiConnections.live);
-  osmApiConnections.push(defaultOsmApiConnections.dev);
-}
+const osmApiConnections = [{
+  url: window.HUDHUD_OSM_URL || 'https://www.openstreetmap.org',
+  apiUrl: window.HUDHUD_OSM_URL || 'https://api.openstreetmap.org',
+  client_id: window.HUDHUD_OSM_CLIENT_ID || 'O3g0mOUuA2WY5Fs826j5tP260qR3DDX7cIIE2R2WWSc',
+  client_secret: window.HUDHUD_OSM_CLIENT_SECRET || 'b4aeHD1cNeapPPQTrvpPoExqQRjybit6JBlNnxh62uE'
+}, {
+  url: window.PUBLIC_OSM_URL || 'https://www.openstreetmap.org',
+  apiUrl: window.PUBLIC_OSM_API || 'https://api.openstreetmap.org',
+  client_id: window.PUBLIC_OSM_CLIENT_ID || 'O3g0mOUuA2WY5Fs826j5tP260qR3DDX7cIIE2R2WWSc',
+  client_secret: window.PUBLIC_OSM_CLIENT_SECRET || 'b4aeHD1cNeapPPQTrvpPoExqQRjybit6JBlNnxh62uE'
+}];
 
 // auxiliary OSM services
 const taginfoApiUrl = ENV__ID_TAGINFO_API_URL
