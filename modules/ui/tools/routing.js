@@ -20,7 +20,7 @@ export function uiToolRouting(context) {
             })
             .call(uiTooltip()
                 .placement('bottom')
-                .title(() => 'Test routabiliy for the current map')
+                .title(() => 'Test routabiliy for the current map. If you have unsaved changes, please commit them first.')
                 .scrollContainer(context.container().select('.top-toolbar'))
             )
             .call(svgIcon('#iD-icon-routing'));
