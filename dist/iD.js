@@ -72533,6 +72533,23 @@
     return tool;
   }
 
+  // modules/ui/tools/routing.js
+  function uiToolRouting(context) {
+    var tool = {
+      id: "routing",
+      label: (s2) => s2.append("span").attr("class", "localized-text").text("Routing")
+    };
+    tool.render = function(selection2) {
+      selection2.append("button").attr("class", "bar-button").attr("aria-label", "test").on("click", function() {
+        const url = "".concat(window.ROUTING_HOST, "?bbox=").concat(context.map().extent().padByMeters(300).rectangle().join());
+        window.open(url, "id-routing", "width=800,height=600,menubar=no,toolbar=no,location=no,status=no,resizable=yes,scrollbars=yes");
+      }).call(
+        uiTooltip().placement("bottom").title(() => "Test routabiliy for the current map").scrollContainer(context.container().select(".top-toolbar"))
+      ).call(svgIcon("#iD-icon-routing"));
+    };
+    return tool;
+  }
+
   // modules/ui/tools/sidebar_toggle.js
   function uiToolSidebarToggle(context) {
     var tool = {
@@ -72643,7 +72660,7 @@
 
   // modules/ui/top_toolbar.js
   function uiTopToolbar(context) {
-    var sidebarToggle = uiToolSidebarToggle(context), modes = uiToolDrawModes(context), notes = uiToolNotes(context), undoRedo = uiToolUndoRedo(context), save = uiToolSave(context);
+    var sidebarToggle = uiToolSidebarToggle(context), routing = uiToolRouting(context), modes = uiToolDrawModes(context), notes = uiToolNotes(context), undoRedo = uiToolUndoRedo(context), save = uiToolSave(context);
     function notesEnabled() {
       var noteLayer = context.layers().layer("notes");
       return noteLayer && noteLayer.enabled();
@@ -72660,6 +72677,7 @@
       function update() {
         var tools = [
           sidebarToggle,
+          routing,
           "spacer",
           modes
         ];
